@@ -1,9 +1,9 @@
 // This is the top-level component
 // so we'll keep application state at this level.
 // 👉 1- Import the state hook!
-import React, { useState } from 'react'
-import FriendsList from './FriendsList'
-import Search from './Search'
+import React, { useState } from "react";
+import FriendsList from "./FriendsList";
+import Search from "./Search";
 // 👉 2- Import the dummy data that will power the application.
 // (Tomorrow we'll fetch the data from an API instead.)
 import friendsData, { hello } from "../dummy-data/friends";
@@ -19,7 +19,7 @@ export default function App() {
 
   // 👉 5- Build a `changeStatus` function that takes an id and
   // changes the `married` from true to false and viceversa
-  const changeStatus = id => {
+  const changeStatus = (id) => {
     /**
      * 1.) Loop! (for, forEach, map, filter, find, reduce)
      * 2.) When we find the correct user
@@ -28,39 +28,41 @@ export default function App() {
      * 4.) Set state!
      */
 
-  const updatedFriends = friends.map(fr => {
-    if (fr.id === id) {
+    const updatedFriends = friends.map((fr) => {
+      if (fr.id === id) {
         return { ...fr, married: !fr.married };
       } else {
         return fr;
       }
-    })
+    });
     setFriends(updatedFriends);
-  }
+  };
 
   // STRETCH - Make a helper function that returns
   // a filtered array of friends data (filtering by search term)
   const getFilteredFriends = () => {
-    const filteredFriends = friends.filter(fr => {
-      return fr.name.toLowerCase().includes(searchTerm.toLowerCase())
-    })
+    const filteredFriends = friends.filter((fr) => {
+      return fr.name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
     return filteredFriends;
-  }
+  };
 
   return (
-    <div className='app-friends container'>
+    <div className="app-friends container">
       {/** document.createElement("div") */}
       {/* 👉 6- Render the Search component */}
       {/* STRETCH - Changes to the input should update the search term */}
-      <Search setSearchTerm={setSearchTerm}/>
+      <Search setSearchTerm={setSearchTerm} />
 
       {/* 👉 7- Render the FriendsList component */}
       {/* What prop/props does FriendsList need? */}
-      <FriendsList myFriends={getFilteredFriends()} changeStatus={changeStatus} />
+      <FriendsList
+        myFriends={getFilteredFriends()}
+        changeStatus={changeStatus}
+      />
     </div>
-  )
+  );
 }
-
 
 /**
  * props => data passed from parent to child (component)
